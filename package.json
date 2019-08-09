@@ -1,0 +1,23 @@
+{
+  "name": "cloud-bot",
+  "version": "1.0.0",
+  "description": "A slackbot to manage cloud resources",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/desainis/cloud-bot.git"
+  },
+  "author": "Nishant Desai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/desainis/cloud-bot/issues"
+  },
+  "homepage": "https://github.com/desainis/cloud-bot#readme",
+  "dependencies": {
+    "@google-cloud/compute": "^1.1.2",
+    "slackbots": "^1.2.0"
+  }
+}

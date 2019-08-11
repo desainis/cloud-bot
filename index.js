@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Connect to MongoDB
 mongoose
   .connect(
-    'mongodb://mongo:27017/cbot',
+    'mongodb://mongo:27017/docker-node-mongo',
     { useNewUrlParser: true }
   )
   .then(() => console.log('MongoDB Connected'))

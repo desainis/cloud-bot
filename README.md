@@ -119,6 +119,12 @@ services:
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
+### Learn More
+
+Please read the documentation on the client libraries below:
+
+* [NodeJS Client](https://googleapis.dev/nodejs/compute/latest/index.html#reference) for Google Cloud Platform
+
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the 

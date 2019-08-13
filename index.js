@@ -2,34 +2,29 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const app = express();
+const SlackBot = require('slackbots');
+const axios = require('axios');
 
-app.set('view engine', 'ejs');
-
-app.use(bodyParser.urlencoded({ extended: false }));
+var listSvc = require('./services/gcloud/list.js');
 
 // Connect to MongoDB
 mongoose
   .connect(
-    'mongodb://mongo:27017/docker-node-mongo',
+    'mongodb://mongo:27017/chat-bot',
     { useNewUrlParser: true }
   )
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
-const port = 3000;
-
-const SlackBot = require('slackbots');
-const axios = require('axios');
-
 require('dotenv').config();
 
 const bot = new SlackBot({
     token: process.env.token,
-    name: "CBot"
+    name: process.env.botName
 });
 
-const help = `Usage:\n
+const help = `
+\`cbot vmlist <params>\` - power help
 \`cbot power <on|off|reboot> <vm-name>\` - power help
 \`cbot help\` - Get Usage Help
 `
@@ -38,10 +33,10 @@ const help = `Usage:\n
 bot.on('start', () => {
 
     const params = {
-        icon_emoji: ':cbot:',
+        icon_emoji: process.env.iconEmoji,
         attachments: [
             {
-                "fallback": "CBot Help",
+                "fallback": "Cloud Bot Help",
                 "color": "#2eb886",
                 "text": help,
                 "ts": (new Date).getTime() / 1000
@@ -50,8 +45,8 @@ bot.on('start', () => {
     };
 
     bot.postMessageToChannel(
-        'chatops', 
-        '',
+        process.env.channel, 
+        'Usage:',
         params
     );
 
@@ -60,4 +55,39 @@ bot.on('start', () => {
 // Error Handler 
 bot.on('error', (err) => console.log(err));
 
-app.listen(port, () => console.log('Server running...'));
+// Message Handler
+bot.on('message', (data) => {
+
+  if (data.type !== 'message') {
+      return;
+  }
+
+  if (data.text === "cbot help") {
+      getHelp(data.text);
+  }
+
+  if (data.text === "cbot vmlist") {
+    listSvc.listVMs(process.env.gcloudKeyFile, process.env.projectId, process.env.iconEmoji, process.env.channel, bot);
+  }
+
+});
+
+// Respond to data
+function getHelp(message) {
+  const params = {
+      icon_emoji: process.env.iconEmoji,
+      attachments: [
+          {
+              "color": "#2eb886",
+              "text": help,
+              "ts": (new Date).getTime() / 1000
+          }
+      ]
+  };
+
+  bot.postMessageToChannel(
+      process.env.channel, 
+      'Usage:',
+      params
+  );
+}

@@ -5,7 +5,7 @@ This application helps manage your favorite compute resources all through chat.
 ## Getting Started
 
 - Clone this repository
-- Rename `.env.sample` to `.env`
+- Create a dotenv file `.env` and supply the credentials under #
 - Replace all credentials required for cloud services.
 
 ### Prerequisities
@@ -30,32 +30,48 @@ An API key (service account) from your favorite cloud provider(s).
 
 #### Build
 
-```bash
+```console
 docker-compose up
 ```
 
 - How to open a shell inside the cbot image
 
-```bash
-docker run -it cbot bash
+```console
+docker run -it chat-bot bash
 ```
 
 - Run it in detached mode (in the background)
 
-```bash
+```console
 docker-compose -d
+```
+
+- Build only
+```console
+docker-compose build
+```
+
+- Build and Run
+```console
+docker-compose up --build
 ```
 
 #### Teardown
 
 - Run it in detached mode (in the background)
 
-```bash
+```console
 docker-compose down
 ```
 #### Environment Variables
 
-* TBD
+- `token` - Slack OAuth token for bot user. For more information see [Slack Documentation](https://api.slack.com/docs/oauth)
+- `channel` - Default slack channel to post welcome message
+- `botName` - Name for bot user
+- `iconEmoji` - icon emoji (i.e. `:cbot:`)
+- `gcloudKeyFile` - Google Cloud Platform service account json secrets file path. For more information see the [Google Cloud Platform documentation](https://cloud.google.com/compute/docs/access/service-accounts)
+- `projectId` - Default project ID to work within
+
 
 #### Volumes
 
@@ -64,6 +80,7 @@ docker-compose down
 #### Useful File Locations
 
 * `index.js` - Main application code
+* `service/<platform>/*.js` - services used to fetch information from respective cloud platforms. 
 
 ## Built With
 
@@ -80,9 +97,7 @@ RUN npm install
 
 COPY . /usr/src/app
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+RUN ["chmod", "+x", "/usr/src/app/wait-for-it.sh"]
 ```
 
 - MongoDB
@@ -90,7 +105,7 @@ CMD ["npm", "start"]
 version: '3'
 services:
   app:
-    container_name: cbot
+    container_name: chat-bot
     restart: always
     build: .
     ports:
@@ -107,7 +122,6 @@ services:
 ## Network Specifications
 
 ### Ports
-- Application: `80:3000`
 - MongoDB: `27017:27017`
 
 ## Find Us

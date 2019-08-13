@@ -5,7 +5,7 @@ This application helps manage your favorite compute resources all through chat.
 ## Getting Started
 
 - Clone this repository
-- Create a dotenv file `.env` and supply the credentials under #
+- Create a dotenv file `.env` and supply the credentials under [Environment Variables](#environment-variables)
 - Replace all credentials required for cloud services.
 
 ### Prerequisities

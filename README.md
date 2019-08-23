@@ -1,4 +1,4 @@
-# CBot - Slack Bot
+# Splink - Slack Bot
 
 This application helps manage your favorite compute resources all through chat. 
 

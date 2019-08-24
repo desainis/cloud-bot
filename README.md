@@ -34,10 +34,10 @@ An API key (service account) from your favorite cloud provider(s).
 docker-compose up
 ```
 
-- How to open a shell inside the cbot image
+- How to open a shell inside the splink image
 
 ```console
-docker run -it chat-bot bash
+docker run -it splink bash
 ```
 
 - Run it in detached mode (in the background)
@@ -66,11 +66,6 @@ docker-compose down
 #### Environment Variables
 
 - `token` - Slack OAuth token for bot user. For more information see [Slack Documentation](https://api.slack.com/docs/oauth)
-- `channel` - Default slack channel to post welcome message
-- `botName` - Name for bot user
-- `iconEmoji` - icon emoji (i.e. `:cbot:`)
-- `gcloudKeyFile` - Google Cloud Platform service account json secrets file path. For more information see the [Google Cloud Platform documentation](https://cloud.google.com/compute/docs/access/service-accounts)
-- `projectId` - Default project ID to work within
 
 
 #### Volumes
@@ -104,19 +99,20 @@ RUN ["chmod", "+x", "/usr/src/app/wait-for-it.sh"]
 ```yml
 version: '3'
 services:
-  app:
-    container_name: chat-bot
-    restart: always
-    build: .
-    ports:
-      - '80:3000'
-    links: 
-      - mongo
   mongo:
     container_name: mongo
     image: mongo
     ports:
       - '27017:27017'
+    volumes:
+      - ./data/db:/data/db
+  app:
+    container_name: splink
+    restart: on-failure
+    build: .
+    depends_on:
+      - mongo
+    command: ["./wait-for-it.sh", "mongo:27017", "--", "node", "index.js"]
 ```
 
 ## Network Specifications
@@ -126,7 +122,7 @@ services:
 
 ## Find Us
 
-* [GitHub](https://github.com/desainis/cloud-bot)
+* [GitHub](https://github.com/desainis/splink)
 * [Quay.io](coming-soon)
 
 ## Contributing
@@ -142,13 +138,13 @@ Please read the documentation on the client libraries below:
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the 
-[tags on this repository](https://github.com/desainis/cloud-bot/tags). 
+[tags on this repository](https://github.com/desainis/splink/tags). 
 
 ## Authors
 
-* **Nishant Desai** - *Initial work* - [Cbot](https://github.com/desainis/cloud-bot)
+* **Nishant Desai** - *Initial work* - [Splink](https://github.com/desainis/splink)
 
-See also the list of [contributors](https://github.com/desainis/cloud-bot/contributors) who 
+See also the list of [contributors](https://github.com/desainis/splink/contributors) who 
 participated in this project.
 
 ## License

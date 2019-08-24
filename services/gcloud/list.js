@@ -1,6 +1,6 @@
 
 module.exports = {
-    listVMs: function (secrets, projectId, iconEmoji, slackChannel, bot,) {
+    listVMs: function (secrets, projectId, iconEmoji, slackChannel, bot) {
         const Compute = require('@google-cloud/compute');
         const compute = new Compute({
             projectId: projectId,

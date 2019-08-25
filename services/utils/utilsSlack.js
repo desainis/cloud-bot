@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+var request = require('request')
+
 module.exports = {
 
     // Slack Responses
@@ -16,6 +18,21 @@ module.exports = {
             // `res` contains information about the posted message
             console.log('Message sent');
         })();
+    },
+
+    sendMessageToSlackResponseURL: function (responseURL, JSONmessage) {
+        var postOptions = {
+            uri: responseURL,
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            json: JSONmessage
+        };
+
+        request(postOptions, (error, response, body) => {
+            console.log(error);
+        });
     }
 
 }

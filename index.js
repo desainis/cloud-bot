@@ -29,7 +29,6 @@ const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const port = process.env.PORT || 3000;
 
 // Cloud Services
-var listSvc = require('./services/gcloud/list.js');
 var utils = require('./services/utils/utils.js');
 var utilsSlack = require('./services/utils/utilsSlack.js');
 

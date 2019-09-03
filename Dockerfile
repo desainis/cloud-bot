@@ -1,11 +1,11 @@
 FROM node:12-slim
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/
 
-COPY package*.json /usr/src/app
+COPY package*.json /usr/src/app/
 
 RUN npm install
 
-COPY . /usr/src/app
+COPY . /usr/src/app/
 
 RUN ["chmod", "+x", "/usr/src/app/wait-for-it.sh"]

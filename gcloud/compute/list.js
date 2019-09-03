@@ -16,18 +16,6 @@ module.exports = {
                 res = res.concat("• `", vms[i].name, "`\n");
                 //Do something
             }
-
-            const params = {
-                icon_emoji: iconEmoji
-            }
-
-            var response = 'List of VM(s) for Project `' + projectId + '`:\n' + res;
-
-            bot.postMessageToChannel(
-                slackChannel, 
-                response,
-                params
-            );
         });
     }
 }

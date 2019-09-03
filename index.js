@@ -29,18 +29,22 @@ const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const port = process.env.PORT || 3000;
 
 // Cloud Services
-var utils = require('./services/utils/utils.js');
-var utilsSlack = require('./services/utils/utilsSlack.js');
+var gcpCreate = require('./gcloud/compute/create.js.js');
+var gcpList = require('./gcloud/compute/list.js.js');
+
+// Utils Services
+var utils = require('./lib/utils.js');
+var utilsSlack = require('./lib/utilsSlack.js');
 
 // Connect to MongoDB
-// mongoose
-//     .connect(
-//         'mongodb://mongo:27017/splink', {
-//             useNewUrlParser: true
-//         }
-//     )
-//     .then(() => console.log('MongoDB Connected'))
-//     .catch(err => console.log(err));
+mongoose
+    .connect(
+        'mongodb://mongo:27017/splink', {
+            useNewUrlParser: true
+        }
+    )
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
 
 rtm.start()
     .catch(console.error);
@@ -60,6 +64,10 @@ rtm.on('message', (event) => {
 
     if (event.text.includes("help")) {
         utils.getHelp(rtm, web, event.channel);
+    }
+
+    if (event.text.startsWith("splink createVM")) {
+        gcpCreate.createVirtualMachine(process.env.GCP_SECRETS, 'eloquent-walker-177701', 'test');
     }
 
 });

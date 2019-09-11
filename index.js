@@ -29,22 +29,22 @@ const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const port = process.env.PORT || 3000;
 
 // Cloud Services
-var gcpCreate = require('./gcloud/compute/create.js.js');
-var gcpList = require('./gcloud/compute/list.js.js');
+var gcpCreate = require('./gcloud/compute/create.js');
+var gcpList = require('./gcloud/compute/list.js');
 
 // Utils Services
 var utils = require('./lib/utils.js');
 var utilsSlack = require('./lib/utilsSlack.js');
 
 // Connect to MongoDB
-mongoose
-    .connect(
-        'mongodb://mongo:27017/splink', {
-            useNewUrlParser: true
-        }
-    )
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.log(err));
+// mongoose
+//     .connect(
+//         'mongodb://mongo:27017/splink', {
+//             useNewUrlParser: true
+//         }
+//     )
+//     .then(() => console.log('MongoDB Connected'))
+//     .catch(err => console.log(err));
 
 rtm.start()
     .catch(console.error);
@@ -62,12 +62,13 @@ rtm.on('message', (event) => {
         return;
     }
 
-    if (event.text.includes("help")) {
+    if (event.text.includes("splink help")) {
         utils.getHelp(rtm, web, event.channel);
     }
 
-    if (event.text.startsWith("splink createVM")) {
-        gcpCreate.createVirtualMachine(process.env.GCP_SECRETS, 'eloquent-walker-177701', 'test');
+    if (event.text.startsWith("splink createvm")) {
+        utilsSlack.openDialogForCreateVM();
+        //gcpCreate.createVirtualMachine(process.env.GCP_SECRETS, 'eloquent-walker-177701', 'test');
     }
 
 });
@@ -102,12 +103,14 @@ app.post('/slack/actions', urlencodedParser, (req, res) => {
     if (utils.isValidSlackRequest(req)) {
         var actionJSONPayload = JSON.parse(req.body.payload) // parse URL-encoded payload JSON string
 
-        var message = {
-            "text": actionJSONPayload.user.name + " clicked: " + actionJSONPayload.actions[0].name,
-            "replace_original": false
-        };
+        utils.delegateRequestForAction(actionJSONPayload.trigger_id, actionJSONPayload.callback_id, actionJSONPayload.actions, actionJSONPayload.response_url);
 
-        utilsSlack.sendMessageToSlackResponseURL(actionJSONPayload.response_url, message);
+        // var message = {
+        //     "text": actionJSONPayload.user.name + " clicked: " + actionJSONPayload.actions[0].name,
+        //     "replace_original": false
+        // };
+
+        // utilsSlack.sendMessageToSlackResponseURL(actionJSONPayload.response_url, message);
     }
 
 });

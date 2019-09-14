@@ -3,6 +3,8 @@
 
 This application helps manage your favorite compute resources all through chat. Simplyfying day to day operations. 
 
+![splink-image-icon-logo](https://storage.googleapis.com/splink/splink-icon.png)
+
 ## Getting Started
 
 - Authorize this app for your slack workspace

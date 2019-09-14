@@ -13,4 +13,5 @@ services:
     build: .
     depends_on:
       - mongo
-    command: ["./wait-for-it.sh", "mongo:27017", "--", "node", "index.js"]
+    environment:
+      WAIT_HOSTS: mongo:27017

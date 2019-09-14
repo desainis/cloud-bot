@@ -36,14 +36,14 @@ var utils = require('./lib/utils.js');
 var utilsSlack = require('./lib/utilsSlack.js');
 
 // Connect to MongoDB
-// mongoose
-//     .connect(
-//         'mongodb://mongo:27017/splink', {
-//             useNewUrlParser: true
-//         }
-//     )
-//     .then(() => console.log('MongoDB Connected'))
-//     .catch(err => console.log(err));
+mongoose
+    .connect(
+        'mongodb://mongo:27017/app', {
+            useNewUrlParser: true
+        }
+    )
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
 
 rtm.start()
     .catch(console.error);

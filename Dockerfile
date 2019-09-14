@@ -8,4 +8,9 @@ RUN npm install
 
 COPY . /usr/src/app/
 
-RUN ["chmod", "+x", "/usr/src/app/wait-for-it.sh"]
+## THE LIFE SAVER
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
+RUN chmod +x /wait
+
+## Launch the wait tool and then your application
+CMD /wait && node index.js

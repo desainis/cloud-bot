@@ -10,6 +10,8 @@ Simplyfying day to day operations through chatops.
 - Authorize this app for your slack workspace
 - Send us your encrypted credentials using GPG with our public key below. 
 
+<details>
+
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
@@ -49,6 +51,8 @@ FkaHV9aIFYKdouhNwNobiUcQdig/KAOPYQ==
 =oaoH
 -----END PGP PUBLIC KEY BLOCK-----
 ```
+
+</details>
 
 - Type `splink [aws|gcp|do|ibmcloud] setup` to setup access controls (alternately type `splink help` and use the dialog setup). 
 - Once the app authorizes the respective service, you're all setup! 

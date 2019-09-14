@@ -3,7 +3,7 @@
 
 Simplyfying day to day operations through chatops. 
 
-![splink-image-icon-logo](https://storage.googleapis.com/splink/splink-icon.png)
+<img src="https://storage.googleapis.com/splink/splink-icon.png" alt="splink image icon logo" width="128" height="128">
 
 ## Getting Started
 

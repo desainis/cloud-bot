@@ -1,7 +1,7 @@
 # Splink - Slack Bot
 [![CircleCI](https://circleci.com/gh/desainis/splink/tree/master.svg?style=svg)](https://circleci.com/gh/desainis/splink/tree/master)
 
-This application helps manage your favorite compute resources all through chat. Simplyfying day to day operations. 
+Simplyfying day to day operations through chatops. 
 
 ![splink-image-icon-logo](https://storage.googleapis.com/splink/splink-icon.png)
 

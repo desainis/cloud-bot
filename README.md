@@ -1,4 +1,5 @@
 # Splink - Slack Bot
+[![CircleCI](https://circleci.com/gh/desainis/splink/tree/master.svg?style=svg)](https://circleci.com/gh/desainis/splink/tree/master)
 
 This application helps manage your favorite compute resources all through chat. 
 

@@ -29,8 +29,7 @@ const slackInteractions = createMessageAdapter(process.env.SLACK_SIGNING_SECRET)
 const port = process.env.PORT || 3000;
 
 // Cloud Services
-var gcpCreate = require('./gcloud/compute/create.js');
-var gcpList = require('./gcloud/compute/list.js');
+var gcpCompute = require('./gcloud/compute/compute.js');
 
 // Utils Services
 var utils = require('./lib/utils.js');
@@ -66,11 +65,17 @@ rtm.on('message', (event) => {
         utils.getHelp(rtm, web, event.channel);
     }
 
-    if (event.text.startsWith("splink createvm")) {
+    if (event.text.startsWith("splink vm create")) {
         utilsSlack.openDialogForCreateVM();
         //gcpCreate.createVirtualMachine(process.env.GCP_SECRETS, 'eloquent-walker-177701', 'test');
     }
 
+    if (event.text.startsWith("splink vm list")) {
+        gcpCompute.listVMs().then(function (response) {
+            utilsSlack.slackResponse(rtm, web, event.channel, response, 'Summary of Available Resources on Google Cloud Platform');
+        });
+
+    }
 });
 
 var rawBodySaver = function (req, res, buf, encoding) {

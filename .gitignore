@@ -71,3 +71,6 @@ conf/*
 
 # ngrok
 ngrok
+
+# gpg
+.gpg/*

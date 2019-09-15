@@ -1,8 +1,16 @@
- version: 2
+ version: 2.1
+ orbs:
+  codecov: codecov/codecov@1.0.5
  jobs:
    build:
      docker:
        - image: circleci/node:10.16.2
      steps:
        - checkout
-       - run: echo "A template"
+       - run: npm install
+       - save-cache:
+           paths:
+            - node_modules
+           key: v1-dependencies-{{ checksum "package.json" }}
+        
+       - run: npm test

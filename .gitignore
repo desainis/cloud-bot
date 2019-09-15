@@ -74,3 +74,6 @@ ngrok
 
 # gpg
 .gpg/*
+
+# Codecov
+coverage/*

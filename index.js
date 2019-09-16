@@ -109,13 +109,7 @@ app.post('/slack/actions', urlencodedParser, (req, res) => {
         var actionJSONPayload = JSON.parse(req.body.payload) // parse URL-encoded payload JSON string
 
         utils.delegateRequestForAction(actionJSONPayload.trigger_id, actionJSONPayload.callback_id, actionJSONPayload.actions, actionJSONPayload.response_url);
-
-        // var message = {
-        //     "text": actionJSONPayload.user.name + " clicked: " + actionJSONPayload.actions[0].name,
-        //     "replace_original": false
-        // };
-
-        // utilsSlack.sendMessageToSlackResponseURL(actionJSONPayload.response_url, message);
+        
     }
 
 });

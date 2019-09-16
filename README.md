@@ -2,6 +2,7 @@
 [![CircleCI](https://circleci.com/gh/desainis/splink/tree/master.svg?style=svg)](https://circleci.com/gh/desainis/splink/tree/master)
 [![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
 [![codecov](https://codecov.io/gh/desainis/splink/branch/master/graph/badge.svg)](https://codecov.io/gh/desainis/splink)
+[![Known Vulnerabilities](https://snyk.io/test/github/desainis/splink/badge.svg)](https://snyk.io/test/github/desainis/splink)
 
 Simplyfying day to day operations through chatops. 
 

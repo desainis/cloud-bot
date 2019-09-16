@@ -109,8 +109,8 @@ app.post('/slack/actions', urlencodedParser, (req, res) => {
         var actionJSONPayload = JSON.parse(req.body.payload) // parse URL-encoded payload JSON string
 
         utils.delegateRequestForAction(actionJSONPayload.trigger_id, actionJSONPayload.callback_id, actionJSONPayload.actions, actionJSONPayload.response_url);
-        
-    }
+
+    }   
 
 });
 

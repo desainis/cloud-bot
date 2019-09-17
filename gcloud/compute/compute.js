@@ -11,7 +11,6 @@ module.exports = {
         });
         const zone = compute.zone('us-central1-c');
 
-        const vmName = 'new-virtual-machine';
         var promise = zone.createVM(vmName, {
             os: 'ubuntu'
         }).then(function (data) {

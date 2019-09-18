@@ -110,7 +110,7 @@ app.post('/slack/actions', urlencodedParser, (req, res) => {
 
         utils.delegateRequestForAction(actionJSONPayload.trigger_id, actionJSONPayload.callback_id, actionJSONPayload.actions, actionJSONPayload.response_url);
 
-    }
+    }   
 
 });
 

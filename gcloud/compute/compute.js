@@ -21,6 +21,25 @@ module.exports = {
 
     },
 
+    createNetwork: function(secrets, config, name) {
+
+        const Compute = require('@google-cloud/compute');
+        var projectId = 'eloquent-walker-177701';
+        const compute = new Compute({
+            projectId: projectId,
+            keyFilename: process.env.GCP_SECRETS
+        });
+          
+        compute.createNetwork(name, config).then(function(data) {
+        var network = data[0];
+        var operation = data[1];
+        var apiResponse = data[2];
+
+        console.log("Network Successfully Created!");
+
+        });
+    },
+
     listVMs: function (secrets) {
         const Compute = require('@google-cloud/compute');
         var projectId = 'eloquent-walker-177701';

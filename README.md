@@ -89,8 +89,8 @@ An API key (service account) from your favorite cloud provider(s).
 
 #### Google Cloud Kubernetes Engine
 
-- `splink gcp k8 list`: Lists all kubernetes clusters _that the service account has access to_ in your Google Cloud Platform project
-- `splink gcp k8 create`: Creates a kubernetes clusters in your GCP Project
+- `splink gcp k8s list`: Lists all kubernetes clusters _that the service account has access to_ in your Google Cloud Platform project
+- `splink gcp k8s create`: Creates a kubernetes clusters in your GCP Project
 
 #### Container Parameters
 

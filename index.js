@@ -55,9 +55,9 @@ rtm.on('channel_joined', (event) => {
 
 rtm.on('message', (event) => {
 
-    //console.log(event);
+    console.log(event);
 
-    if (event.type !== 'message') {
+    if (event.type !== 'message' || (event.hasOwnProperty('username') && event.username == "splink")) {
         return;
     }
 

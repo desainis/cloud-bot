@@ -55,9 +55,11 @@ rtm.on('channel_joined', (event) => {
 
 rtm.on('message', (event) => {
 
-    console.log(event);
+    //console.log(event);
 
-    if (event.type !== 'message' || (event.hasOwnProperty('username') && event.username == "splink")) {
+    if (event.type !== 'message' ||
+        (event.hasOwnProperty('username') && event.username == "splink" &&
+            event.hasOwnProperty('subtype') && event.subtype == "bot_message")) {
         return;
     }
 
@@ -110,7 +112,7 @@ app.post('/slack/actions', urlencodedParser, (req, res) => {
 
         utils.delegateRequestForAction(actionJSONPayload.trigger_id, actionJSONPayload.callback_id, actionJSONPayload.actions, actionJSONPayload.response_url);
 
-    }   
+    }
 
 });
 

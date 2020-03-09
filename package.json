@@ -31,7 +31,7 @@
     "mongoose": "^5.7.12",
     "nodemon": "^1.19.4",
     "querystring": "^0.2.0",
-    "request": "^2.88.0"
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "codecov": "^3.6.1",
